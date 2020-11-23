@@ -44,7 +44,7 @@ module.exports = {
 				.setTitle(title.text())
 				.setURL('https://yummyanime.club')
 				.setAuthor('YummyAnime', 'https://yummyanime.club/img/ya.png', 'https://yummyanime.club')
-				.setThumbnail('https://i.imgur.com/wSTFkRM.png')
+				.setThumbnail('https://yummyanime.club/img/ya.png')
 				.addFields(
 					{ name: '--------------------', value: names.text() },
 					{ name: '--------------------', value: status.text() },
@@ -58,7 +58,7 @@ module.exports = {
 					)
 				.setDescription(descriptionofanime.text())
 				.addField(season.text(), restrictions.text(), true)
-				.setImage(image.text())	
+				.setImage(imageurl)	
 				.setTimestamp()
 				.setFooter('Kaneki Ken', 'https://yummyanime.club/img/ya.png');
 			message.channel.send(animeEmbed);
