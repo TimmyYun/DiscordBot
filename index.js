@@ -16,8 +16,8 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
 	console.log('Ready!');
+	client.user.setActivity('Tokyo Ghoul', { type: 'WATCHING' });
 });
-
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;

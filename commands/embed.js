@@ -22,34 +22,50 @@ module.exports = {
 			
 			let $ = cheerio.load(responseBody);
 
-			let title = $('head title');
-			let descriptionofanime = $('div.content-desc-text p');
+			let title = $('div.content-block.container.clearfix > div.content > div > div > h1');
+			let descriptionofanime = $('#content-desc-text');
+			
 			let rating = $('span.main-rating');
 			let ratingvotes = $('span.main-rating-info')
 			let image = $('div.poster-block img')
-			let views =$('ul.content-main-info li:nth-child(1)')
-			
+			let imageurl = 'https://yummyanime.club' + image.attr('src')
+			let names = $('body > div.content-block.container.clearfix > div.content > div > div > ul.alt-names-list')
+			let views =$('body > div.content-block.container.clearfix > div.content > div > div > ul.content-main-info > li:nth-child(1)')
+			let status = $('body > div.content-block.container.clearfix > div.content > div > div > ul.content-main-info > li:nth-child(2)')
+			let year = $('body > div.content-block.container.clearfix > div.content > div > div > ul.content-main-info > li:nth-child(3)')
+			let season = $('body > div.content-block.container.clearfix > div.content > div > div > ul.content-main-info > li:nth-child(4)')
+			let restrictions = $('body > div.content-block.container.clearfix > div.content > div > div > ul.content-main-info > li:nth-child(5)')
+			let genre = $('body > div.content-block.container.clearfix > div.content > div > div > ul.content-main-info > li:nth-child(6)')
+			let sourceone = $('body > div.content-block.container.clearfix > div.content > div > div > ul.content-main-info > li:nth-child(7)')
+			let studio = $('body > div.content-block.container.clearfix > div.content > div > div > ul.content-main-info > li:nth-child(8)')
+			let director = $('body > div.content-block.container.clearfix > div.content > div > div > ul.content-main-info > li:nth-child(9)')
 			const animeEmbed = new Discord.MessageEmbed()
 				.setColor('#0099ff')
-				.setTitle(title.text().slice(6,title.length-17))
-				.setURL('https://discord.js.org/')
-				.setAuthor('YummyAnime', 'https://yummyanime.club/img/logo_circle1.png', 'https://yummyanime.club')
-				.setDescription(descriptionofanime.text())
+				.setTitle(title.text())
+				.setURL('https://yummyanime.club')
+				.setAuthor('YummyAnime', 'https://yummyanime.club/img/ya.png', 'https://yummyanime.club')
 				.setThumbnail('https://i.imgur.com/wSTFkRM.png')
 				.addFields(
-					{ name: 'Views:', value: views.text() },
+					{ name: '--------------------', value: names.text() },
+					{ name: '--------------------', value: status.text() },
+					{ name: '--------------------', value: genre.text() },
+					{ name: '--------------------', value: sourceone.text() },
+					{ name: '--------------------', value: studio.text() },
+					{ name: '--------------------', value: director.text() },
 					{ name: '\u200B', value: '\u200B' },
-					{ name: 'Rating:' + rating.text(), value: ratingvotes.text(), inline: true },
-					{ name: 'Inline field title', value: 'Some value here', inline: true },
-				)
-				.addField('Inline field title', 'Some value here', true)
-				//.setImage('https://images-na.ssl-images-amazon.com/images/I/61p2jaL9YOL._AC_SY741_.jpg')	
-				.setImage('https://yummyanime.club' + image.attr('src'))	
+					{ name: 'Рейтинг:' + rating.text(), value: ratingvotes.text(), inline: true },
+					{ name: views.text(), value: year.text(), inline: true },
+					)
+				.setDescription(descriptionofanime.text())
+				.addField(season.text(), restrictions.text(), true)
+				.setImage(image.text())	
 				.setTimestamp()
-				.setFooter('Kaneki Bot', 'https://yummyanime.club/img/logo_circle1.png');
+				.setFooter('Kaneki Ken', 'https://yummyanime.club/img/ya.png');
 			message.channel.send(animeEmbed);
 
-			
+			if (error) {
+				return;
+			}
 		});
 
 
