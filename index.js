@@ -16,7 +16,7 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
 	console.log('Ready!');
-	client.user.setActivity('Tokyo Ghoul', { type: 'WATCHING' });
+	client.user.setActivity('WandaVision', { type: 'WATCHING' });
 });
 
 client.on('message', message => {
